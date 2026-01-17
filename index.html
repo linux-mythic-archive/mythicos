@@ -52,23 +52,41 @@
     header img {
         width: 120px;
         height: auto;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
     }
 
     h1 {
         font-size: 2.6rem;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
         font-weight: 600;
     }
 
     p.subtitle {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         opacity: 0.8;
+        margin-top: 0;
+    }
+
+    .theme-toggle {
+        margin-top: 15px;
+        padding: 8px 16px;
+        border-radius: 999px;
+        border: none;
+        cursor: pointer;
+        font-size: 0.95rem;
+        font-weight: 600;
+        background: var(--accent);
+        color: white;
+        transition: background 0.3s, transform 0.2s;
+    }
+
+    .theme-toggle:hover {
+        transform: scale(1.05);
     }
 
     .card {
-        margin-top: 35px;
-        padding: 30px;
+        margin-top: 30px;
+        padding: 26px;
         border-radius: var(--radius);
         width: 90%;
         max-width: 750px;
@@ -79,68 +97,47 @@
 
     body.light .card {
         background: var(--card-light);
+        color: var(--text-dim-light);
     }
 
     body.dark .card {
         background: var(--card-dark);
+        color: var(--text-dim-dark);
     }
 
     h2 {
         color: var(--accent);
         margin-top: 0;
-        font-size: 1.6rem;
+        font-size: 1.5rem;
     }
 
     code {
-        background: rgba(0,0,0,0.15);
+        background: rgba(0,0,0,0.12);
         padding: 8px 10px;
         border-radius: 8px;
-        font-size: 1rem;
+        font-size: 0.95rem;
         display: block;
-        margin: 12px 0;
+        margin: 10px 0;
         white-space: pre-wrap;
         line-height: 1.5;
     }
 
     body.dark code {
-        background: rgba(255,255,255,0.15);
+        background: rgba(255,255,255,0.12);
     }
 
     ol, ul {
         margin-left: 20px;
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
 
     footer {
         margin-top: auto;
-        padding: 25px;
+        padding: 20px;
         opacity: 0.6;
-        font-size: 0.95rem;
+        font-size: 0.9rem;
+        text-align: center;
     }
-    .theme-toggle {
-    margin-top: 15px;
-    padding: 10px 18px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    background: var(--accent);
-    color: white;
-    transition: background 0.3s, transform 0.2s;
-}
-
-.theme-toggle:hover {
-    transform: scale(1.05);
-}
-
-body.light .theme-toggle {
-    background: #4a6cff;
-}
-
-body.dark .theme-toggle {
-    background: #7aa2ff;
-}
 </style>
 
 </head>
@@ -148,9 +145,9 @@ body.dark .theme-toggle {
 
 <header>
     <img src="https://mythicos.hastag.fr/logo2.png" alt="MythicOS Logo">
-    <button id="themeToggle" class="theme-toggle">🌙 Mode sombre</button>
     <h1>MythicOS APT Repository</h1>
     <p class="subtitle">Dépôt officiel pour les mises à jour et paquets MythicOS</p>
+    <button id="themeToggle" class="theme-toggle">🌙 Mode sombre</button>
 </header>
 
 <div class="card">
@@ -168,10 +165,10 @@ wget https://packages.mythicos.hastag.fr/mythicos.gpg
     <h2>🖥️ 2. Ajouter la clé via “Sources de logiciels”</h2>
 
     <ol>
-        <li>Ouvrez <strong>Logiciels & Mises à jour</strong></li>
+        <li>Ouvrez <strong>Logiciels &amp; Mises à jour</strong></li>
         <li>Allez dans l’onglet <strong>Authentification</strong></li>
         <li>Cliquez sur <strong>Importer une clé</strong></li>
-        <li>Sélectionnez le fichier <strong>mythicos.gpg</strong></li>
+        <li>Sélectionnez le fichier <strong>mythicos.gpg</strong> téléchargé</li>
         <li>Validez</li>
     </ol>
 </div>
@@ -180,17 +177,17 @@ wget https://packages.mythicos.hastag.fr/mythicos.gpg
     <h2>📦 3. Ajouter le dépôt APT</h2>
 
     <ol>
-        <li>Ouvrez <strong>Logiciels & Mises à jour</strong></li>
+        <li>Ouvrez <strong>Logiciels &amp; Mises à jour</strong></li>
         <li>Allez dans l’onglet <strong>Autres logiciels</strong></li>
         <li>Cliquez sur <strong>Ajouter…</strong></li>
-        <li>Entrez :</li>
+        <li>Entrez la ligne suivante :</li>
     </ol>
 
     <code>
 deb https://packages.mythicos.hastag.fr stable main
     </code>
 
-    <p>Fermez la fenêtre : le système vous proposera de recharger les paquets.</p>
+    <p>Fermez la fenêtre : le système vous proposera de recharger la liste des paquets.</p>
 </div>
 
 <div class="card">
@@ -198,7 +195,7 @@ deb https://packages.mythicos.hastag.fr stable main
 
     <code>apt policy</code>
 
-    <p>Vous devez voir apparaître :</p>
+    <p>Vous devez voir apparaître une ligne similaire à :</p>
 
     <code>https://packages.mythicos.hastag.fr stable/main amd64 Packages</code>
 </div>
@@ -208,33 +205,10 @@ deb https://packages.mythicos.hastag.fr stable main
 </footer>
 
 <script>
-    // Mode clair/sombre automatique basé sur le système
-    function applyTheme() {
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        document.body.classList.toggle("dark", prefersDark);
-        document.body.classList.toggle("light", !prefersDark);
-    }
-
-    applyTheme();
-    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme);
-
-    // Changement de titre dynamique
-    const titles = [
-        "MythicOS APT Repository",
-        "Dépôt officiel MythicOS",
-        "Mises à jour sécurisées"
-    ];
-    let i = 0;
-    setInterval(() => {
-        document.title = titles[i % titles.length];
-        i++;
-    }, 2500);
-    <script>
     // Applique le thème sauvegardé ou le thème système
     function applyTheme(initial = false) {
         const saved = localStorage.getItem("theme");
         const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
         let theme = saved || (prefersDark ? "dark" : "light");
 
         document.body.classList.remove("light", "dark");
@@ -250,7 +224,6 @@ deb https://packages.mythicos.hastag.fr stable main
         }
     }
 
-    // Basculer manuellement
     function toggleTheme() {
         const current = document.body.classList.contains("dark") ? "dark" : "light";
         const next = current === "dark" ? "light" : "dark";
@@ -258,11 +231,26 @@ deb https://packages.mythicos.hastag.fr stable main
         applyTheme();
     }
 
-    // Initialisation
-    applyTheme(true);
+    // Initialisation après chargement du DOM
+    document.addEventListener("DOMContentLoaded", () => {
+        applyTheme(true);
+        const btn = document.getElementById("themeToggle");
+        if (btn) {
+            btn.addEventListener("click", toggleTheme);
+        }
 
-    // Écouteur du bouton
-    document.getElementById("themeToggle").addEventListener("click", toggleTheme);
+        // Titre dynamique
+        const titles = [
+            "MythicOS APT Repository",
+            "Dépôt officiel MythicOS",
+            "Mises à jour sécurisées"
+        ];
+        let i = 0;
+        setInterval(() => {
+            document.title = titles[i % titles.length];
+            i++;
+        }, 2500);
+    });
 </script>
 
 </body>
