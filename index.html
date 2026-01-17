@@ -5,146 +5,14 @@
 <title>MythicOS APT Repository</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Favicon -->
 <link rel="icon" href="https://mythicos.hastag.fr/favicon2.png">
-
-<style>
-    :root {
-        --bg-light: #f5f5f7;
-        --bg-dark: #1e1e2f;
-        --bg-dark2: #2a2a40;
-        --text-light: #1a1a1a;
-        --text-dark: #ffffff;
-        --text-dim-light: #444;
-        --text-dim-dark: rgba(255,255,255,0.75);
-        --card-light: rgba(0,0,0,0.05);
-        --card-dark: rgba(255,255,255,0.08);
-        --accent: #7aa2ff;
-        --radius: 14px;
-    }
-
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: "Segoe UI", sans-serif;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        min-height: 100vh;
-        transition: background 0.4s, color 0.4s;
-    }
-
-    body.light {
-        background: var(--bg-light);
-        color: var(--text-light);
-    }
-
-    body.dark {
-        background: linear-gradient(135deg, var(--bg-dark), var(--bg-dark2));
-        color: var(--text-dark);
-    }
-
-    header {
-        margin-top: 40px;
-        text-align: center;
-    }
-
-    header img {
-        width: 120px;
-        height: auto;
-        margin-bottom: 10px;
-    }
-
-    h1 {
-        font-size: 2.6rem;
-        margin-bottom: 8px;
-        font-weight: 600;
-    }
-
-    p.subtitle {
-        font-size: 1.1rem;
-        opacity: 0.8;
-        margin-top: 0;
-    }
-
-    .theme-toggle {
-        margin-top: 15px;
-        padding: 8px 16px;
-        border-radius: 999px;
-        border: none;
-        cursor: pointer;
-        font-size: 0.95rem;
-        font-weight: 600;
-        background: var(--accent);
-        color: white;
-        transition: background 0.3s, transform 0.2s;
-    }
-
-    .theme-toggle:hover {
-        transform: scale(1.05);
-    }
-
-    .card {
-        margin-top: 30px;
-        padding: 26px;
-        border-radius: var(--radius);
-        width: 90%;
-        max-width: 750px;
-        backdrop-filter: blur(12px);
-        box-shadow: 0 0 25px rgba(0,0,0,0.15);
-        transition: background 0.4s;
-    }
-
-    body.light .card {
-        background: var(--card-light);
-        color: var(--text-dim-light);
-    }
-
-    body.dark .card {
-        background: var(--card-dark);
-        color: var(--text-dim-dark);
-    }
-
-    h2 {
-        color: var(--accent);
-        margin-top: 0;
-        font-size: 1.5rem;
-    }
-
-    code {
-        background: rgba(0,0,0,0.12);
-        padding: 8px 10px;
-        border-radius: 8px;
-        font-size: 0.95rem;
-        display: block;
-        margin: 10px 0;
-        white-space: pre-wrap;
-        line-height: 1.5;
-    }
-
-    body.dark code {
-        background: rgba(255,255,255,0.12);
-    }
-
-    ol, ul {
-        margin-left: 20px;
-        font-size: 1rem;
-    }
-
-    footer {
-        margin-top: auto;
-        padding: 20px;
-        opacity: 0.6;
-        font-size: 0.9rem;
-        text-align: center;
-    }
-</style>
+<link rel="stylesheet" href="style.css">
 
 </head>
 <body>
 
 <header>
-    <img src="https://mythicos.hastag.fr/logo2.png" alt="MythicOS Logo">
+    <img src="https://mythicos.hastag.fr/logo2.png" alt="MythicOS Logo" class="logo">
     <h1>MythicOS APT Repository</h1>
     <p class="subtitle">Dépôt officiel pour les mises à jour et paquets MythicOS</p>
     <button id="themeToggle" class="theme-toggle">🌙 Mode sombre</button>
@@ -168,7 +36,7 @@ wget https://packages.mythicos.hastag.fr/mythicos.gpg
         <li>Ouvrez <strong>Logiciels &amp; Mises à jour</strong></li>
         <li>Allez dans l’onglet <strong>Authentification</strong></li>
         <li>Cliquez sur <strong>Importer une clé</strong></li>
-        <li>Sélectionnez le fichier <strong>mythicos.gpg</strong> téléchargé</li>
+        <li>Sélectionnez le fichier <strong>mythicos.gpg</strong></li>
         <li>Validez</li>
     </ol>
 </div>
@@ -180,7 +48,7 @@ wget https://packages.mythicos.hastag.fr/mythicos.gpg
         <li>Ouvrez <strong>Logiciels &amp; Mises à jour</strong></li>
         <li>Allez dans l’onglet <strong>Autres logiciels</strong></li>
         <li>Cliquez sur <strong>Ajouter…</strong></li>
-        <li>Entrez la ligne suivante :</li>
+        <li>Entrez :</li>
     </ol>
 
     <code>
@@ -195,7 +63,7 @@ deb https://packages.mythicos.hastag.fr stable main
 
     <code>apt policy</code>
 
-    <p>Vous devez voir apparaître une ligne similaire à :</p>
+    <p>Vous devez voir apparaître :</p>
 
     <code>https://packages.mythicos.hastag.fr stable/main amd64 Packages</code>
 </div>
@@ -204,54 +72,7 @@ deb https://packages.mythicos.hastag.fr stable main
     MythicOS © 2026 — Dépôt APT officiel
 </footer>
 
-<script>
-    // Applique le thème sauvegardé ou le thème système
-    function applyTheme(initial = false) {
-        const saved = localStorage.getItem("theme");
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        let theme = saved || (prefersDark ? "dark" : "light");
-
-        document.body.classList.remove("light", "dark");
-        document.body.classList.add(theme);
-
-        const btn = document.getElementById("themeToggle");
-        if (btn) {
-            btn.textContent = theme === "dark" ? "☀️ Mode clair" : "🌙 Mode sombre";
-        }
-
-        if (!initial) {
-            localStorage.setItem("theme", theme);
-        }
-    }
-
-    function toggleTheme() {
-        const current = document.body.classList.contains("dark") ? "dark" : "light";
-        const next = current === "dark" ? "light" : "dark";
-        localStorage.setItem("theme", next);
-        applyTheme();
-    }
-
-    // Initialisation après chargement du DOM
-    document.addEventListener("DOMContentLoaded", () => {
-        applyTheme(true);
-        const btn = document.getElementById("themeToggle");
-        if (btn) {
-            btn.addEventListener("click", toggleTheme);
-        }
-
-        // Titre dynamique
-        const titles = [
-            "MythicOS APT Repository",
-            "Dépôt officiel MythicOS",
-            "Mises à jour sécurisées"
-        ];
-        let i = 0;
-        setInterval(() => {
-            document.title = titles[i % titles.length];
-            i++;
-        }, 2500);
-    });
-</script>
+<script src="scripts.js"></script>
 
 </body>
 </html>
