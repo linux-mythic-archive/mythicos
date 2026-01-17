@@ -5,76 +5,117 @@
 <title>MythicOS APT Repository</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Favicon -->
+<link rel="icon" href="https://mythicos.hastag.fr/favicon2.png">
+
 <style>
+    :root {
+        --bg-light: #f5f5f7;
+        --bg-dark: #1e1e2f;
+        --bg-dark2: #2a2a40;
+        --text-light: #1a1a1a;
+        --text-dark: #ffffff;
+        --text-dim-light: #444;
+        --text-dim-dark: rgba(255,255,255,0.75);
+        --card-light: rgba(0,0,0,0.05);
+        --card-dark: rgba(255,255,255,0.08);
+        --accent: #7aa2ff;
+        --radius: 14px;
+    }
+
     body {
         margin: 0;
         padding: 0;
         font-family: "Segoe UI", sans-serif;
-        background: linear-gradient(135deg, #1e1e2f, #2a2a40);
-        color: #fff;
         display: flex;
         flex-direction: column;
         align-items: center;
         min-height: 100vh;
+        transition: background 0.4s, color 0.4s;
+    }
+
+    body.light {
+        background: var(--bg-light);
+        color: var(--text-light);
+    }
+
+    body.dark {
+        background: linear-gradient(135deg, var(--bg-dark), var(--bg-dark2));
+        color: var(--text-dark);
     }
 
     header {
-        margin-top: 60px;
+        margin-top: 40px;
         text-align: center;
-        animation: fadeIn 1.2s ease;
+    }
+
+    header img {
+        width: 120px;
+        height: auto;
+        margin-bottom: 15px;
     }
 
     h1 {
-        font-size: 2.8rem;
+        font-size: 2.6rem;
         margin-bottom: 10px;
+        font-weight: 600;
     }
 
-    p {
+    p.subtitle {
         font-size: 1.2rem;
-        opacity: 0.85;
+        opacity: 0.8;
     }
 
     .card {
-        margin-top: 40px;
-        background: rgba(255,255,255,0.08);
-        padding: 25px;
-        border-radius: 12px;
+        margin-top: 35px;
+        padding: 30px;
+        border-radius: var(--radius);
         width: 90%;
-        max-width: 700px;
-        backdrop-filter: blur(10px);
-        box-shadow: 0 0 20px rgba(0,0,0,0.3);
-        animation: slideUp 1s ease;
+        max-width: 750px;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 0 25px rgba(0,0,0,0.15);
+        transition: background 0.4s;
+    }
+
+    body.light .card {
+        background: var(--card-light);
+    }
+
+    body.dark .card {
+        background: var(--card-dark);
     }
 
     h2 {
+        color: var(--accent);
         margin-top: 0;
+        font-size: 1.6rem;
     }
 
     code {
-        background: rgba(255,255,255,0.15);
-        padding: 4px 6px;
-        border-radius: 6px;
-        font-size: 0.95rem;
+        background: rgba(0,0,0,0.15);
+        padding: 8px 10px;
+        border-radius: 8px;
+        font-size: 1rem;
         display: block;
-        margin-bottom: 10px;
-        word-wrap: break-word;
+        margin: 12px 0;
+        white-space: pre-wrap;
+        line-height: 1.5;
+    }
+
+    body.dark code {
+        background: rgba(255,255,255,0.15);
+    }
+
+    ol, ul {
+        margin-left: 20px;
+        font-size: 1.1rem;
     }
 
     footer {
         margin-top: auto;
-        padding: 20px;
-        opacity: 0.5;
-        font-size: 0.9rem;
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(-10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes slideUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
+        padding: 25px;
+        opacity: 0.6;
+        font-size: 0.95rem;
     }
 </style>
 
@@ -82,13 +123,14 @@
 <body>
 
 <header>
+    <img src="https://mythicos.hastag.fr/logo2.png" alt="MythicOS Logo">
     <h1>MythicOS APT Repository</h1>
-    <p>Dépôt officiel pour les mises à jour et paquets MythicOS</p>
+    <p class="subtitle">Dépôt officiel pour les mises à jour et paquets MythicOS</p>
 </header>
 
 <div class="card">
     <h2>🔑 1. Télécharger la clé GPG</h2>
-    <p>Cette clé permet à votre système de vérifier que les paquets viennent bien de MythicOS.</p>
+    <p>Téléchargez la clé officielle utilisée pour vérifier les paquets MythicOS.</p>
 
     <code>
 wget https://packages.mythicos.hastag.fr/mythicos.gpg
@@ -98,34 +140,32 @@ wget https://packages.mythicos.hastag.fr/mythicos.gpg
 </div>
 
 <div class="card">
-    <h2>🖥️ 2. Ajouter la clé via “Sources de logiciels” (méthode débutants)</h2>
+    <h2>🖥️ 2. Ajouter la clé via “Sources de logiciels”</h2>
 
     <ol>
         <li>Ouvrez <strong>Logiciels & Mises à jour</strong></li>
         <li>Allez dans l’onglet <strong>Authentification</strong></li>
         <li>Cliquez sur <strong>Importer une clé</strong></li>
-        <li>Sélectionnez le fichier <strong>mythicos.gpg</strong> téléchargé</li>
+        <li>Sélectionnez le fichier <strong>mythicos.gpg</strong></li>
         <li>Validez</li>
     </ol>
-
-    <p>La clé est maintenant installée dans votre système.</p>
 </div>
 
 <div class="card">
-    <h2>📦 3. Ajouter le dépôt APT via “Sources de logiciels”</h2>
+    <h2>📦 3. Ajouter le dépôt APT</h2>
 
     <ol>
         <li>Ouvrez <strong>Logiciels & Mises à jour</strong></li>
         <li>Allez dans l’onglet <strong>Autres logiciels</strong></li>
         <li>Cliquez sur <strong>Ajouter…</strong></li>
-        <li>Entrez la ligne suivante :</li>
+        <li>Entrez :</li>
     </ol>
 
     <code>
 deb https://packages.mythicos.hastag.fr stable main
     </code>
 
-    <p>Fermez la fenêtre : le système vous proposera de recharger la liste des paquets.</p>
+    <p>Fermez la fenêtre : le système vous proposera de recharger les paquets.</p>
 </div>
 
 <div class="card">
@@ -133,7 +173,7 @@ deb https://packages.mythicos.hastag.fr stable main
 
     <code>apt policy</code>
 
-    <p>Vous devez voir apparaître une ligne similaire à :</p>
+    <p>Vous devez voir apparaître :</p>
 
     <code>https://packages.mythicos.hastag.fr stable/main amd64 Packages</code>
 </div>
@@ -143,6 +183,17 @@ deb https://packages.mythicos.hastag.fr stable main
 </footer>
 
 <script>
+    // Mode clair/sombre automatique basé sur le système
+    function applyTheme() {
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.body.classList.toggle("dark", prefersDark);
+        document.body.classList.toggle("light", !prefersDark);
+    }
+
+    applyTheme();
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme);
+
+    // Changement de titre dynamique
     const titles = [
         "MythicOS APT Repository",
         "Dépôt officiel MythicOS",
