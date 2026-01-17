@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>MythicOS APT Repository</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(135deg, #1e1e2f, #2a2a40);
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    header {
+        margin-top: 60px;
+        text-align: center;
+        animation: fadeIn 1.2s ease;
+    }
+
+    h1 {
+        font-size: 2.8rem;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 1.2rem;
+        opacity: 0.8;
+    }
+
+    .card {
+        margin-top: 40px;
+        background: rgba(255,255,255,0.08);
+        padding: 25px;
+        border-radius: 12px;
+        width: 90%;
+        max-width: 600px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        animation: slideUp 1s ease;
+    }
+
+    code {
+        background: rgba(255,255,255,0.15);
+        padding: 4px 6px;
+        border-radius: 6px;
+        font-size: 0.95rem;
+    }
+
+    footer {
+        margin-top: auto;
+        padding: 20px;
+        opacity: 0.5;
+        font-size: 0.9rem;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+</head>
+<body>
+
+<header>
+    <h1>MythicOS APT Repository</h1>
+    <p>Bienvenue sur le dépôt officiel de paquets MythicOS</p>
+</header>
+
+<div class="card">
+    <h2>Ajouter le dépôt</h2>
+    <p>Ce dépôt est déjà intégré dans MythicOS.  
+    Pour les autres distributions :</p>
+
+    <p><strong>Clé :</strong></p>
+    <code>wget -O - https://packages.mythicos.hastag.fr/mythicos-key.asc | sudo tee /etc/apt/keyrings/mythicos.gpg</code>
+
+    <p><strong>Dépôt :</strong></p>
+    <code>deb [signed-by=/etc/apt/keyrings/mythicos.gpg] https://packages.mythicos.hastag.fr stable main</code>
+</div>
+
+<footer>
+  © 2026 MythicOS — Dépôt APT officiel
+</footer>
+
+<script>
+    // Petit effet JS : changement de titre dynamique
+    const titles = [
+        "MythicOS APT Repository",
+        "Dépôt officiel MythicOS",
+        "Mises à jour sécurisées"
+    ];
+    let i = 0;
+    setInterval(() => {
+        document.title = titles[i % titles.length];
+        i++;
+    }, 2500);
+</script>
+
+</body>
+</html>
