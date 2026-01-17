@@ -31,7 +31,7 @@
 
     p {
         font-size: 1.2rem;
-        opacity: 0.8;
+        opacity: 0.85;
     }
 
     .card {
@@ -40,10 +40,14 @@
         padding: 25px;
         border-radius: 12px;
         width: 90%;
-        max-width: 600px;
+        max-width: 700px;
         backdrop-filter: blur(10px);
         box-shadow: 0 0 20px rgba(0,0,0,0.3);
         animation: slideUp 1s ease;
+    }
+
+    h2 {
+        margin-top: 0;
     }
 
     code {
@@ -51,6 +55,9 @@
         padding: 4px 6px;
         border-radius: 6px;
         font-size: 0.95rem;
+        display: block;
+        margin-bottom: 10px;
+        word-wrap: break-word;
     }
 
     footer {
@@ -76,23 +83,72 @@
 
 <header>
     <h1>MythicOS APT Repository</h1>
-    <p>Bienvenue sur le dépôt officiel de paquets MythicOS</p>
+    <p>Dépôt officiel pour les mises à jour et paquets MythicOS</p>
 </header>
 
 <div class="card">
-    <h2>Ajouter le dépôt</h2>
-    <p>Ce dépôt est déjà intégré dans MythicOS.  
-    Pour les autres distributions :</p>
+    <h2>🔑 1. Ajouter la clé GPG (ID)</h2>
+    <p>La clé permet de vérifier que les paquets viennent bien de MythicOS.</p>
 
-    <p><strong>Clé :</strong></p>
-    <code>wget -O - https://packages.mythicos.hastag.fr/mythicos-key.asc | sudo tee /etc/apt/keyrings/mythicos.gpg</code>
+    <code>
+sudo mkdir -p /etc/apt/keyrings<br>
+wget -O /etc/apt/keyrings/mythicos.gpg https://packages.mythicos.hastag.fr/mythicos-key.asc<br>
+sudo chmod 644 /etc/apt/keyrings/mythicos.gpg
+    </code>
 
-    <p><strong>Dépôt :</strong></p>
-    <code>deb [signed-by=/etc/apt/keyrings/mythicos.gpg] https://packages.mythicos.hastag.fr stable main</code>
+    <p><strong>ID de la clé :</strong> ABCD1234EF5678901234567890ABCDEF12345678</p>
+</div>
+
+<div class="card">
+    <h2>📦 2. Ajouter le dépôt APT</h2>
+    <p>Ajoutez cette ligne dans vos sources APT :</p>
+
+    <code>
+deb [signed-by=/etc/apt/keyrings/mythicos.gpg] https://packages.mythicos.hastag.fr stable main
+    </code>
+
+    <p>Puis mettez à jour :</p>
+
+    <code>sudo apt update</code>
+</div>
+
+<div class="card">
+    <h2>🖥️ 3. Ajouter via “Sources de logiciels” (débutants)</h2>
+    <p>Si vous préférez une méthode graphique :</p>
+
+    <ol>
+        <li>Ouvrez <strong>Logiciels & Mises à jour</strong></li>
+        <li>Allez dans l’onglet <strong>Autres logiciels</strong></li>
+        <li>Cliquez sur <strong>Ajouter…</strong></li>
+        <li>Entrez la ligne suivante :</li>
+    </ol>
+
+    <code>
+deb [signed-by=/etc/apt/keyrings/mythicos.gpg] https://packages.mythicos.hastag.fr stable main
+    </code>
+
+    <p>Ensuite :</p>
+    <ul>
+        <li>Allez dans l’onglet <strong>Authentification</strong></li>
+        <li>Cliquez sur <strong>Importer une clé</strong></li>
+        <li>Sélectionnez <strong>mythicos-key.asc</strong></li>
+    </ul>
+
+    <p>Fermez la fenêtre → elle vous proposera de recharger les paquets.</p>
+</div>
+
+<div class="card">
+    <h2>✔️ 4. Vérifier que tout fonctionne</h2>
+
+    <code>apt policy</code>
+
+    <p>Vous devez voir apparaître :</p>
+
+    <code>https://packages.mythicos.hastag.fr stable/main amd64 Packages</code>
 </div>
 
 <footer>
-  © 2026 MythicOS — Dépôt APT officiel
+    MythicOS © 2026 — Dépôt APT officiel
 </footer>
 
 <script>
