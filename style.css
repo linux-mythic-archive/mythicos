@@ -1,0 +1,128 @@
+:root {
+    --bg-light: #f5f5f7;
+    --bg-dark: #1e1e2f;
+    --bg-dark2: #2a2a40;
+    --text-light: #1a1a1a;
+    --text-dark: #ffffff;
+    --text-dim-light: #444;
+    --text-dim-dark: rgba(255,255,255,0.75);
+    --card-light: rgba(0,0,0,0.05);
+    --card-dark: rgba(255,255,255,0.08);
+    --accent: #7aa2ff;
+    --radius: 14px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    transition: background 0.4s, color 0.4s;
+}
+
+body.light {
+    background: var(--bg-light);
+    color: var(--text-light);
+}
+
+body.dark {
+    background: linear-gradient(135deg, var(--bg-dark), var(--bg-dark2));
+    color: var(--text-dark);
+}
+
+header {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.logo {
+    width: 120px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-size: 2.6rem;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+.theme-toggle {
+    margin-top: 15px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    background: var(--accent);
+    color: white;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.05);
+}
+
+.card {
+    margin-top: 30px;
+    padding: 26px;
+    border-radius: var(--radius);
+    width: 90%;
+    max-width: 750px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 25px rgba(0,0,0,0.15);
+    transition: background 0.4s;
+}
+
+body.light .card {
+    background: var(--card-light);
+    color: var(--text-dim-light);
+}
+
+body.dark .card {
+    background: var(--card-dark);
+    color: var(--text-dim-dark);
+}
+
+h2 {
+    color: var(--accent);
+    margin-top: 0;
+    font-size: 1.5rem;
+}
+
+code {
+    background: rgba(0,0,0,0.12);
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    display: block;
+    margin: 10px 0;
+    white-space: pre-wrap;
+    line-height: 1.5;
+}
+
+body.dark code {
+    background: rgba(255,255,255,0.12);
+}
+
+ol, ul {
+    margin-left: 20px;
+    font-size: 1rem;
+}
+
+footer {
+    margin-top: auto;
+    padding: 20px;
+    opacity: 0.6;
+    font-size: 0.9rem;
+    text-align: center;
+}
