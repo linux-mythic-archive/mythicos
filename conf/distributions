@@ -1,0 +1,9 @@
+Origin: MythicOS
+Label: MythicOS
+Suite: stable
+Codename: lucid
+Version: 1.0
+Architectures: amd64 source
+Components: main
+Description: Dépôt officiel MythicOS
+SignWith: MA CLE GPG
